@@ -19,22 +19,48 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+
+        <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+        
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                    <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline" style="margin-right: 30px">Home</a>
                     <a class="nav-link text-sm text-gray-700 dark:text-gray-500 underline" style="margin-right: 10px" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
+                    <ul id="menu">
+                        <li>
+                          <input id="check01" type="checkbox" name="menu"/>
+                          <label for="check01">{{ Auth::user()->name }}</label>
+                          <ul class="submenu">
+                            <li>
+                                <a href="{{ url('/home') }}" >Home</a>
+                            </li>
+                            <li>
+                                <a href="#">Profile</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                          </ul>
+                        </li>
+                    </ul>
             
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                    
+
+                
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline" style="margin-right: 20px">Log in</a>
 
@@ -132,7 +158,6 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>
