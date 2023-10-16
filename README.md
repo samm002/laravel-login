@@ -18,3 +18,8 @@ composer install
 ```
 php artisan serve
 ```
+
+## Run frontend assets
+```
+npm run dev
+```

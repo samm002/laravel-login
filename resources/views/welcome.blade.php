@@ -42,7 +42,7 @@
                                 <a href="{{ url('/home') }}" >Home</a>
                             </li>
                             <li>
-                                <a href="#">Profile</a>
+                                <a href="{{ route('profile.index') }}">Profile</a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
