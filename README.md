@@ -21,5 +21,5 @@ php artisan serve
 
 ## 2. Start front-end development server
 ```
-php artisan serve
+npm run dev
 ```
