@@ -8,12 +8,13 @@
 </p>
 
 # Setup
-
+First thing that should be done after cloning the repository :
 ## Install Composer in project
 ```
 composer install
 ```
 
+# How to run the project :
 ## 1. Run server
 ```
 php artisan serve
