@@ -14,7 +14,12 @@
 composer install
 ```
 
-## Run server
+## 1. Run server
+```
+php artisan serve
+```
+
+# 2. Start front-end development server
 ```
 php artisan serve
 ```
