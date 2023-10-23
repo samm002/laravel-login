@@ -64,11 +64,12 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="social-auth-links text-center mt-2 mb-3">
-                            <a href="{{ route('google.login') }}" class="btn btn-block btn-danger">
-                                <i class="fab fa-google-plus mr-2"></i> Sign in using Google
-                            </a>
+                        <div class="row mb-0">
+                            <div class="social-auth-links my-2 col-md-8 offset-md-4">
+                                <a href="{{ route('google.login') }}" class="btn btn-block btn-danger">
+                                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>
