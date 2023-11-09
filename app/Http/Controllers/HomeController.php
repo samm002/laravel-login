@@ -31,6 +31,11 @@ class HomeController extends Controller
         return view('welcome');
     }
 
+    public function profile()
+    {
+        return view('profile');
+    }
+
     public function app()
     {
         return view('layouts/app');

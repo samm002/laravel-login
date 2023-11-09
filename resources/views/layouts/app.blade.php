@@ -74,6 +74,8 @@
 
         <main class="py-4">
             @yield('content')
+            @yield('profile')
+            @yield('edit_profile')
         </main>
     </div>
 </body>

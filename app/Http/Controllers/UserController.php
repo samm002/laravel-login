@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        return view('profile')->with('data', $user);
     }
 
     /**
@@ -44,9 +46,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        
     }
 
     /**
@@ -55,9 +57,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        return view('edit_profile');
     }
 
     /**
@@ -67,9 +69,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'fullname' => ['string'],
+            'phone' => ['integer'],
+        ]);
+
+        auth()->user()->update([
+            'fullname' => $request->fullname,
+            'phone' => $request->phone,
+        ]);
+
+        return back()->with('message', 'Your profile has been completed');
     }
 
     /**
