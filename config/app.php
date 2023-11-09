@@ -15,7 +15,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => 'IFL Malang',
+    // 'name' => env('APP_NAME', 'IFL Malang'),
 
     /*
     |--------------------------------------------------------------------------
