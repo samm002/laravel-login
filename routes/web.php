@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ConfirmPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +54,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/welcome', [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
     });
 });
+
+// Reset password route bisa dilihat di :
+// vendor/laravel/ui/src/AuthRouteMethods
