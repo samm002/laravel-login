@@ -74,11 +74,13 @@ class UserController extends Controller
         $request->validate([
             'fullname' => ['string'],
             'phone' => ['integer'],
+            'username' => ['string']
         ]);
 
         auth()->user()->update([
             'fullname' => $request->fullname,
             'phone' => $request->phone,
+            'username' => $request->username,
         ]);
 
         return back()->with('message', 'Your profile has been completed');
