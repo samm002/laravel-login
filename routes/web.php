@@ -55,5 +55,14 @@ Route::group(['middleware' => ['auth']], function() {
     });
 });
 
+Route::get('/role', function () {
+  return view('page.role.showAllRole');
+});
+
+Route::get('/role/{id}', function () {
+  return view('page.role.roleDetail');
+})->name('roleDetail');
+
+Route::get('/roleDetail/{role}', 'RoleController@showUsersForRole')->name('role.users');
 // Reset password route bisa dilihat di :
 // vendor/laravel/ui/src/AuthRouteMethods

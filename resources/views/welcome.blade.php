@@ -36,7 +36,7 @@
                     <ul id="menu">
                         <li>
                           <input id="check01" type="checkbox" name="menu"/>
-                          <label for="check01">{{ Auth::user()->name }}</label>
+                          <label for="check01">{{ Auth::user()->username ? Auth::user()->username : Auth::user()->name }}</label>
                           <ul class="submenu">
                             <li>
                                 <a href="{{ url('/home') }}" >Home</a>
