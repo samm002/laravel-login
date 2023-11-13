@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,28 +23,46 @@ use App\Http\Controllers\SuperAdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/admin', function () {
-    return view('admin.layout.master');
+  return view('admin.layout.master');
 });
 
-Auth::routes();
+Route::group(['prefix' => 'auth'], function () {
+  Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+  Auth::routes();
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/welcome', [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
-Route::get('/app', [App\Http\Controllers\HomeController::class, 'app'])->name('app');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/welcome', [HomeController::class, 'welcome'])->name('welcome');
+Route::get('/app', [HomeController::class, 'app'])->name('app');
 
-Route::get('/profile', [App\Http\Controllers\UserController::class, 'index']);
-Route::get('/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('profile.edit');
-Route::put('/update', [App\Http\Controllers\UserController::class, 'update'])->name('profile.update');
+Route::get('/profile', [UserController::class, 'index']);
+Route::get('/edit', [UserController::class, 'edit'])->name('profile.edit');
+Route::put('/update', [UserController::class, 'update'])->name('profile.update');
 
-Route::get('auth/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('google.login');
-Route::get('auth/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
 
-Route::get('/profile', [ProfileController::class, 'index']);
-Route::get('/profile/{id}', [ProfileController::class, 'show']);
+Route::group([
+  'middleware' => ['auth', 'role:admin']
+], function() {
+  Route::get('/profile', [ProfileController::class, 'index']);
+  Route::get('/profile/{id}', [ProfileController::class, 'show']);
+});
 
-Route::get('/admin', [AdminController::class,'index']);
-Route::get('/superadmin', [SuperAdminController::class,'index']);
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/superadmin', [SuperAdminController::class, 'index']);
+
+Route::get('/role/app', [HomeController::class, 'app'])->middleware('role:admin');
+// Route::get('/copywriter/dashboard', 'CopyWriterController@dashboard')->middleware('checkRole:copy writer');
+
+Route::get('/role', function () {
+  return view('page.role.showAllRole');
+});
+
+Route::get('/role/{id}', function () {
+  return view('page.role.roleDetail');
+});

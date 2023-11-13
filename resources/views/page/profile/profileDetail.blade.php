@@ -16,6 +16,12 @@ Show Profile = {{$user->id}}
         <li class="list-group-item"><strong>Email:</strong> {{$user->email}}</li>
         <li class="list-group-item"><strong>Password:</strong> {{$user->password}}</li>
         <li class="list-group-item"><strong>Google ID:</strong> {{$user->google_id}}</li>
+        {{-- <li class="list-group-item"><strong>Role:</strong>
+            @foreach ($user->roles as $role)
+              {{ $role->name }}
+            @endforeach
+        </li> --}}
+        <li class="list-group-item"><strong>Role:</strong> {{ $user->roles[0]->name }}</li>
         <li class="list-group-item"><strong>Dibuat:</strong> {{$user->created_at}}</li>
         <li class="list-group-item"><strong>Terakhir Diperbarui:</strong> {{$user->updated_at}}</li>
       </ul>

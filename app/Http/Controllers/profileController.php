@@ -17,7 +17,7 @@ class profileController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('layouts.showAllProfile', ['user' => $user]);
+        return view('page.profile.showAllProfile', ['user' => $user]);
     }
 
      /**
@@ -31,6 +31,6 @@ class profileController extends Controller
     {
         $user = User::find($id);
 
-        return view('layouts.showProfile', ['user' => $user]);
+        return view('page.profile.profileDetail', ['user' => $user]);
     }
 }
