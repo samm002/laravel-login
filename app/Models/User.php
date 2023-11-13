@@ -23,6 +23,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at',
         'password',
         'google_id',
+        'username',
+        'address',
+        'phone_number',
     ];
     
     protected $table = 'users';

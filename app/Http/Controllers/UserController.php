@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('profile')->with('data', $user);
+        return view('profile')->with('user', $user);
     }
 
     /**
@@ -59,7 +59,8 @@ class UserController extends Controller
      */
     public function edit()
     {
-        return view('edit_profile');
+      $user = Auth::user();
+        return view('edit_profile')->with('user', $user);
     }
 
     /**
@@ -67,23 +68,27 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+    //  * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request)
     {
         $request->validate([
-            'fullname' => ['string'],
-            'phone' => ['integer'],
-            'username' => ['string']
+          'username' => 'string',
+          'address' => 'string',
+          'phone_number' => 'numeric'
         ]);
+
+        // dd($request->all());
 
         auth()->user()->update([
-            'fullname' => $request->fullname,
-            'phone' => $request->phone,
-            'username' => $request->username,
+          'username' => $request->input('username'),
+          'address' => $request->input('address'),
+          'phone_number' => $request->input('phone_number'),
         ]);
 
-        return back()->with('message', 'Your profile has been completed');
+        // return back()->with('message', 'Your profile has been completed');
+        return redirect('/profile');
     }
 
     /**
