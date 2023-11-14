@@ -24,7 +24,7 @@
           </ul>
       </div>
     @endif
-    <form action="{{ route('profile.update') }}" method="POST">
+    <form action="{{ route('profile.update', ['id' => Auth::id()]) }}" method="POST">
     @csrf
     @method('put')
     <div class="my-3 p-3 bg-body rounded shadow-sm">

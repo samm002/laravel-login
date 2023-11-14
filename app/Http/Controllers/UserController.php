@@ -57,7 +57,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
       $user = Auth::user();
         return view('edit_profile')->with('user', $user);
@@ -71,12 +71,12 @@ class UserController extends Controller
     //  * @return \Illuminate\Http\Response
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request->validate([
-          'username' => 'string',
-          'address' => 'string',
-          'phone_number' => 'numeric'
+          'username' => 'string|nullable',
+          'address' => 'string|nullable',
+          'phone_number' => 'numeric|nullable'
         ]);
 
         // dd($request->all());
