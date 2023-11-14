@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -71,19 +73,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $request->validate([
-            'fullname' => ['string'],
-            'phone' => ['integer'],
-            'username' => ['string']
-        ]);
-
-        auth()->user()->update([
-            'fullname' => $request->fullname,
-            'phone' => $request->phone,
-            'username' => $request->username,
-        ]);
-
-        return back()->with('message', 'Your profile has been completed');
+        
     }
 
     /**

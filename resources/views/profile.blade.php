@@ -9,13 +9,13 @@
             <div class="mb-3 row">
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    {{ Auth::user()->email }}
+                    {{ Auth::user()->id }}
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
-                    {{ Auth::user()->name }}
+                    {{ Auth::user()->id }}
                 </div>
             </div>
         @endif
