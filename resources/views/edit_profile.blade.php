@@ -15,43 +15,56 @@
             </div>
         </div>
     @endif
-    <form action="{{ route('profile.update') }}" method="PUT">
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
+    <form action="{{ route('profile.update') }}" method="POST">
     @csrf
+    @method('put')
     <div class="my-3 p-3 bg-body rounded shadow-sm">
             <div class="mb-3 row">
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10" class="form-control">
-                    {{ Auth::user()->email }}
+                    {{ $user->email }}
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <label class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
-                    {{ Auth::user()->name }}
+                    {{ $user->name }}
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="username" class="col-sm-2 col-form-label">Username</label>
+                <label class="col-sm-2 col-form-label">Username</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name='username' id="username">
+                    <input type="text" class="form-control" name='username' value="{{ $user->username }}">
                 </div>
             </div>
         <div class="mb-3 row">
-            <label for="fullname" class="col-sm-2 col-form-label">Full Name</label>
+            <label class="col-sm-2 col-form-label">Address</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='fullname' id="fullname">
+                <input type="text" class="form-control" name='address' value="{{ $user->address }}">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
+            <label class="col-sm-2 col-form-label">Phone Number</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='phone' id="phone">
+                <input type="number" class="form-control" name='phone_number' value="{{ $user->phone_number }}">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="user" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10"><button type="submit" class="btn btn-primary" name="submit">Save</button></div>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary" name="submit" >Save</button>
+            </div>
         </div>
+      
         </form>
     </div>
 </main>

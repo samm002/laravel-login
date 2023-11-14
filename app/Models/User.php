@@ -23,6 +23,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at',
         'password',
         'google_id',
+        'username',
+        'address',
+        'phone_number',
     ];
     
     protected $table = 'users';
@@ -45,4 +48,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles()
+  {
+    return $this->belongsToMany(Role::class);
+  }
+
+  public function hasRole($role)
+  {
+    return $this->roles->contains('name', $role);
+  }
 }
