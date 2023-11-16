@@ -34,8 +34,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/app', [HomeController::class, 'app'])->name('app');
 
-Route::group(['middleware' => 'verified'], function () {
-  Route::g
+Route::group(['middleware' => 'verified', 'prefix' => 'profile'], function () {
   Route::get('/', [UserController::class, 'index'])->name('profile.show');
   Route::get('/{id}/edit', [UserController::class, 'edit'])->name('profile.edit');
   Route::put('/{id}', [UserController::class, 'update'])->name('profile.update');
@@ -66,8 +65,14 @@ Route::group(['middleware'=> ['verified', 'role:admin'], 'prefix' => 'role'], fu
   Route::get('/{id}', function () {
     return view('page.role.roleDetail');
   })->name('roleDetail');
+  
 });
 
+Route::get('/role_user_api', function () {
+  return view('page.role.apiPivotData');
+});
+
+Route::get('/role_user', [UserController::class, 'viewPivotData']);
 
 // Route::get('/roleDetail/{role}', 'RoleController@showUsersForRole')->name('role.users');
 // Reset password route bisa dilihat di :

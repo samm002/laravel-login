@@ -8,10 +8,21 @@ use App\Models\User;
 
 class Role_UserController extends Controller
 {
-  public function showUsersForRole(Role $role)
+  public function viewPivotData()
   {
-      $users = $role->users;
-      
-      return view('users_for_role', compact('role', 'users'));
+
+    $usersData = [];
+
+      $user = User::all();
+
+      foreach ($user as $user) {
+        $userData = [
+          'username' => $user->username,
+          'role' => $user->roles->pluck('name')->toArray(),  
+        ];
+        $usersData[] = $userData;
+      }
+
+      return response()->json(['data' => $usersData]);
   }
 }
